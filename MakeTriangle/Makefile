@@ -2,7 +2,15 @@ cppsrc = $(wildcard ../common/*.cpp)
 hppsrc = $(wildcard ../common/*.hpp)
 objsrc = $(cppsrc:*.cpp=*.o)
 
-LDFLAGS = -lGL -lglut -lGLEW -lglfw
+OS := $(shell uname)
+
+ifeq ($(OS), Darwin)
+	# Check if its in MAC OS
+	LDFLAGS = -framework OpenGl -lGLEW -lglfw
+else
+	# Check if its Linux
+	LDFLAGS = -lGL -lglut -lGLEW -lglfw 
+endif
 
 all: tri commonPrep
 
