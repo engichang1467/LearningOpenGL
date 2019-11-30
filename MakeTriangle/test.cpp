@@ -13,7 +13,7 @@
 #include <glm/glm.hpp>
 using namespace glm;
 
-#include "shader.hpp"
+#include "../common/shader.hpp"
 
 
 int main( void )
