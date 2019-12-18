@@ -1,0 +1,56 @@
+2x3 matrix
+
+| 2 5 7 |
+| 9 8 1 |
+
+
+TransformedVertex = matrix * vertex
+
+| a b c d |   | x |   | ax + by + cz + dw |
+| e f g h | * | y | = | ex + fy + gz + hw |
+| i j k l |   | z |   | ix + jy + kz + lw |
+| m n o p |   | w |   | mx + ny + oz + pw |
+
+
+
+mat4 myMatrix = translate(mat4(), vec3(10.0f, 0.0f, 0.0f));
+vec4 myVector(10.0f, 10.0f, 10.0f, 0.0f);
+
+// Translation Matrices
+vec4 transformedVector = myMatrix * myVector; 
+
+// Identity Matrices
+mat4 myIdentityMatrix = mat4(1.0f);
+
+// Scaling matrices
+mat4 myScalingMatrix = scale( 2.0f, 2.0f, 2.0f );
+
+// Rotation Matrices
+vec3 myRotationAxis( ??, ??, ?? );
+rotate( angle_ind_degrees, myRotationAxis);
+
+// Cumulating Transformations
+// Format: TransformedVector = TranslationMatrix * RotationMatrix * ScaleMatrix * OriginalVector;
+
+mat4 myModelMatrix = myTranslationMatrix * myRotationMatrix * myScaleMatrix;
+vec4 myTransformedVector = myModelMatrix * myOriginalVector;
+
+// View Matrix
+mat4 ViewMatrix = translate(mat4(), vec3(-3.0f, 0.0f, 0.0f));
+
+// CameraMatrix
+mat4 CameraMatrix = lookAt( cameraPosition, // position of your camera in world space 
+                            cameraTarget,   // where we want to look at in world space
+                            upVector);      // ex vec3(0,1,0), but (0,-1,0) make us look upside down
+
+// Projection Matrix 
+mat4 projectionMatrix = perspective( radians(FoV), // Vertical Field of View in Radians (amount of zoom) Think "camera lens" 
+                                     4.0f / 3.0f,  // Aspecting Ratio
+                                     0.1f,         // Near clipping plane
+                                     100.0f);      // far clipping plane. keep as little as possible
+
+
+// Cumulating tranformations: ModelViewProjection matrix
+mat4 MVPmatrix = projection * view * model;
+
+
